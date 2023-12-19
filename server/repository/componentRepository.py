@@ -8,7 +8,32 @@ class ComponentRepository:
         conn = get_db_connection()
         cur = conn.cursor()
         cur.execute('SELECT * FROM components')
-        components = cur.fetchall()
+        columns = [col[0] for col in cur.description]
+        components = [dict(zip(columns, row)) for row in cur.fetchall()]
+        cur.close()
+        conn.close()
+        return components
+
+    @staticmethod
+    def get_all_components_with_details():
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('''
+            SELECT 
+                c.name AS component_name, c.price, c.description AS component_description, 
+                c.stock_quantity, c.barcode,
+                cat.name AS category_name, cat.description AS category_description,
+                br.name AS brand_name, br.description AS brand_description,
+                st.name AS store_name, st.phone AS store_phone, st.email AS store_email,
+                ad.street, ad.city, ad.state, ad.zip_code, ad.country
+            FROM components c
+            JOIN categories cat ON c.category_id = cat.category_id
+            JOIN brands br ON c.brand_id = br.brand_id
+            JOIN stores st ON c.store_id = st.store_id
+            JOIN addresses ad ON st.address_id = ad.address_id
+        ''')
+        columns = [col[0] for col in cur.description]
+        components = [dict(zip(columns, row)) for row in cur.fetchall()]
         cur.close()
         conn.close()
         return components
@@ -29,11 +54,13 @@ class ComponentRepository:
         cur = conn.cursor()
         cur.execute(
             'INSERT INTO components (name, category_id, brand_id, store_id, price, description, stock_quantity, '
-            'barcode) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)',
+            'barcode) VALUES (%s, %s, %s, %s, %s, %s, %s, %s) RETURNING component_id',
             (name, category_id, brand_id, store_id, price, description, stock_quantity, barcode))
+        component_id = cur.fetchone()[0]
         conn.commit()
         cur.close()
         conn.close()
+        return component_id
 
     @staticmethod
     def update_component(component_id, name, category_id, brand_id, store_id, price, description, stock_quantity,
