@@ -1,12 +1,11 @@
 """
-Serve app with waitress
+Serve app
 """
 
-from waitress import serve
 
 from server import create_app
 
 if __name__ == "__main__":
-    print('Serving app with waitress')
+    print('Serving app')
     app = create_app()
-    serve(app)
+    app.run(debug=True, port=8080)

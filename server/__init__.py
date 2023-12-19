@@ -18,19 +18,11 @@ def create_app():
     """
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
-    app.config['FLASK_DEBUG'] = True
-
-    # pylint: disable=import-outside-toplevel,wrong-import-position,unused-import
-
-    # setup database
-    from . import db
-
-    db.init_app(app)
 
     # register blueprints
-    from . import contacts
+    from . import components
 
-    app.register_blueprint(contacts.blueprint)
+    app.register_blueprint(components.components_blueprint)
 
     # register index route
     @app.route("/")
