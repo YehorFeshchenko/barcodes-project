@@ -156,7 +156,7 @@ function AddComponent() {
                     <label>Category Name:</label>
                     <input
                         type="text"
-                        name="categoryName"
+                        name="category_name"
                         value={formData.category_name}
                         onChange={handleChange}
                         placeholder="Category Name"

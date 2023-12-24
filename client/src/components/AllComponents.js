@@ -88,7 +88,7 @@ function AllComponents() {
             {selectedBarcode && (
                 <div>
                     <h3>Barcode Image</h3>
-                    <img src={`http://localhost:8080/static/images/${selectedBarcode}.png`} alt={`http://localhost:8080/static/images/${selectedBarcode}.png`} />
+                    <img src={`http://localhost:8080/static/images/${selectedBarcode}.png`} alt="Barcode not found!" />
                 </div>
             )}
         </div>

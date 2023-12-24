@@ -1,26 +1,50 @@
 /* SearchComponent.css */
 .search-component {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.search-component form {
+    margin-bottom: 20px;
 }
 
 .search-component .barcode-image {
-    max-width: 100%;
+    max-width: 90%;
     height: auto;
     margin-top: 15px;
 }
 
 .search-component-details {
-    margin: 20px auto;
+    width: 80%; /* Adjust width as needed */
     padding: 15px;
+    /*margin-top: 20px;*/
     border: 1px solid #007bff; /* Blue border */
     border-radius: 15px; /* Rounded corners */
-    display: inline-block;
-    text-align: center;
-    width: 80%; /* Adjust width as needed */
     background-color: white; /* Background color */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Optional: Adds a shadow for depth */
+    display: flex;
+    flex-direction: row; /* Align children in a row */
+    flex-wrap: wrap; /* Allow wrapping if needed */
+    justify-content: space-around; /* Space out columns */
+    max-width: 800px; /* Set a max width for the container */
+    margin: auto; /* Center the container */
 }
 
 .search-component-details p {
     margin: 10px 0;
+}
+
+.detail-column {
+    flex: 1 1 40%; /* Adjust the flex-basis to control column width */
+    min-width: 250px; /* Minimum width for each column */
+    padding: 10px;
+}
+
+.detail-label {
+    font-weight: bold;
+    margin-right: 5px;
+    color: #007bff; /* Color to make labels stand out */
 }

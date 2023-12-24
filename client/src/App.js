@@ -13,7 +13,7 @@ function App() {
         <Router>
             <div>
                 <Navbar className="navbar-custom" expand="lg">
-                    <Navbar.Brand href="#home">My App</Navbar.Brand>
+                    <Navbar.Brand href="/">My App</Navbar.Brand>
                     <Nav className="mr-auto">
                         <Nav.Link href="/">All Components</Nav.Link>
                         <Nav.Link href="/add">Add Component</Nav.Link>
