@@ -60,11 +60,11 @@ def add_component_with_details():
     if not store_id:
         store_id = StoreRepository.add_store(data['store_name'], address_id, data['store_phone'], data['store_email'])
 
-    component_name = data['name'].upper().replace(" ", "")[:5]
+    component_name = data['name'].upper().replace(" ", "")[:10]
 
     barcode_list = [component_name, category_id, brand_id, address_id, store_id]
     barcode_string = '-'.join(map(str, barcode_list))
-    barcode_image = BarcodeService.generate(barcode_string)
+    BarcodeService.generate(barcode_string)
 
     # Add the Component
     component_id = ComponentRepository.add_component(
@@ -75,7 +75,26 @@ def add_component_with_details():
         price=data['price'],
         description=data['description'],
         stock_quantity=data['stock_quantity'],
-        barcode=barcode_image
+        barcode=barcode_string
     )
 
     return jsonify({'component_id': component_id}), 201
+
+
+@components_blueprint.route("/decode-barcode", methods=["POST"])
+def decode_barcode():
+    data = request.json
+    barcode_string = data.get('barcode_string')
+
+    if not barcode_string:
+        return jsonify({'message': 'Barcode string is required'}), 400
+
+    barcode_data = BarcodeService.decode(barcode_string)
+
+    all_components = ComponentRepository.get_all_components_with_details()
+    matched_component = next((comp for comp in all_components if comp['barcode'] == barcode_data), None)
+
+    if matched_component is None:
+        return jsonify({'message': 'No component found with this barcode in the database'}), 404
+    else:
+        return jsonify(matched_component), 200

@@ -20,12 +20,12 @@ class ComponentRepository:
         cur = conn.cursor()
         cur.execute('''
             SELECT 
-                c.name AS component_name, c.price, c.description AS component_description, 
-                c.stock_quantity, c.barcode,
-                cat.name AS category_name, cat.description AS category_description,
-                br.name AS brand_name, br.description AS brand_description,
-                st.name AS store_name, st.phone AS store_phone, st.email AS store_email,
-                ad.street, ad.city, ad.state, ad.zip_code, ad.country
+                c.component_id, c.name AS component_name, c.price, c.description AS component_description, 
+                c.stock_quantity, c.barcode, c.category_id, c.brand_id, c.store_id,
+                cat.category_id, cat.name AS category_name, cat.description AS category_description,
+                br.brand_id, br.name AS brand_name, br.description AS brand_description,
+                st.store_id, st.name AS store_name, st.phone AS store_phone, st.email AS store_email, st.address_id,
+                ad.address_id, ad.street, ad.city, ad.state, ad.zip_code, ad.country
             FROM components c
             JOIN categories cat ON c.category_id = cat.category_id
             JOIN brands br ON c.brand_id = br.brand_id

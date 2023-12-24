@@ -1,0 +1,26 @@
+.add-component-form {
+    max-width: 500px;
+    margin: auto;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+}
+
+.add-component-form input,
+.add-component-form textarea {
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+}
+
+.add-component-form button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+}

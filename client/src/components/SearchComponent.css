@@ -1,0 +1,26 @@
+/* SearchComponent.css */
+.search-component {
+    text-align: center;
+}
+
+.search-component .barcode-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 15px;
+}
+
+.search-component-details {
+    margin: 20px auto;
+    padding: 15px;
+    border: 1px solid #007bff; /* Blue border */
+    border-radius: 15px; /* Rounded corners */
+    display: inline-block;
+    text-align: center;
+    width: 80%; /* Adjust width as needed */
+    background-color: white; /* Background color */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Optional: Adds a shadow for depth */
+}
+
+.search-component-details p {
+    margin: 10px 0;
+}

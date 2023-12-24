@@ -1,0 +1,35 @@
+.App {
+  text-align: center;
+}
+
+/* Spacing between sections */
+.section-spacing {
+  margin-bottom: 20px;
+}
+
+/* Global color scheme */
+body {
+  background-color: white;
+  color: #333;
+}
+
+/* Blue color scheme */
+.blue-theme {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Adjustments for navbar */
+.navbar-custom {
+  background-color: #007bff;
+  color: white;
+}
+
+.navbar-custom .nav-link {
+  color: white;
+}
+
+.navbar-custom .navbar-brand {
+  color: white;
+}
+
