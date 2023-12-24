@@ -11,6 +11,7 @@ from ..repository.categoryRepository import CategoryRepository
 from ..repository.brandRepository import BrandRepository
 from ..repository.storeRepository import StoreRepository
 from ..repository.addressRepository import AddressRepository
+from ..services.barcodeService import BarcodeService
 
 components_blueprint = Blueprint("components", __name__)
 
@@ -59,6 +60,12 @@ def add_component_with_details():
     if not store_id:
         store_id = StoreRepository.add_store(data['store_name'], address_id, data['store_phone'], data['store_email'])
 
+    component_name = data['name'].upper().replace(" ", "")[:5]
+
+    barcode_list = [component_name, category_id, brand_id, address_id, store_id]
+    barcode_string = '-'.join(map(str, barcode_list))
+    barcode_image = BarcodeService.generate(barcode_string)
+
     # Add the Component
     component_id = ComponentRepository.add_component(
         name=data['name'],
@@ -68,7 +75,7 @@ def add_component_with_details():
         price=data['price'],
         description=data['description'],
         stock_quantity=data['stock_quantity'],
-        barcode=data['barcode']
+        barcode=barcode_image
     )
 
     return jsonify({'component_id': component_id}), 201

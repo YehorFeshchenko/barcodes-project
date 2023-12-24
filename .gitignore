@@ -8,3 +8,4 @@ sample.sqlite
 docs/_build
 .idea/
 *.env
+images/
